@@ -1,0 +1,15 @@
+version: "3"
+services:
+  node-express-docker:
+    build:
+      context: .
+    volumes:
+      - ./:/usr/app
+    ports:
+      - "3000:3000"
+    command: npm run start
+  mongo:
+    image: mongo
+    command: mongod --port 3010
+    ports:
+      - "3011:3010"
