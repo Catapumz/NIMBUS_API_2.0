@@ -29,6 +29,7 @@ describe("Buscar", () => {
   it("Retrieves", async () => {
     const busqueda = {
       buscar: "hec",
+      quepared: 15,
     };
     const result1 = await request(app)
       .get("/buscar")

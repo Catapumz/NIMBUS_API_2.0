@@ -3,7 +3,7 @@ const Bloques_vias = require("../models/Bloques_vias");
 const consulta = async (req, res) => {
   let { buscar } = req.body;
   let { quepared } = req.body;
-  console.log(req.body);
+
   //{ "buscar": "aqui la busqueda"} asi es como se pasa
   let consulta = await Bloques_vias.find({
     $or: [
