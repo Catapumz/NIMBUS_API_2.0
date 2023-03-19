@@ -27,6 +27,6 @@ app.use("/", routes_editar);
 app.use("/", routes_buscar);
 
 //rutas documentacion
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/documentacion", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 module.exports = { app };
