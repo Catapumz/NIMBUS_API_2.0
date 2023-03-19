@@ -1,0 +1,388 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "NIMBUS WALLS",
+    "description": "Documentacion para API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "35.180.113.93:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "NIMBUS WALLS",
+      "description": "API para comunicar la app y la base de datos en la nube"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/listar": {
+      "get": {
+        "summary": "Ejemplo de solicitud GET con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parámetros de body para aplicar filtroa a la búsqueda, se pueden ignorar uno, dos o los tres.",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quepared": {
+                  "type": "number"
+                },
+                "isbloque": {
+                  "type": "string"
+                },
+                "dificultad": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Listado itinerarios"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "name": "Mi via",
+                  "autor": "Juanito",
+                  "dificultad": 7,
+                  "comentario": "Una via guapisima",
+                  "presas": ["A", "B", "C"],
+                  "quepared": 15,
+                  "isbloque": "bloque"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/guardar": {
+      "post": {
+        "summary": "Ejemplo de solicitud POST con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parámetros de body para guardar un nuevo itinerario, son todos requeridos.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "autor": {
+                  "type": "string"
+                },
+                "dificultad": {
+                  "type": "integer"
+                },
+                "comentario": {
+                  "type": "string"
+                },
+                "presas": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "quepared": {
+                  "type": "integer",
+                  "enum": [15, 25]
+                },
+                "isbloque": {
+                  "type": "string",
+                  "enum": ["bloque", "travesia"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "itinerario": {
+                  "name": "Mi via",
+                  "autor": "Juanito",
+                  "dificultad": 7,
+                  "comentario": "Una via guapisima",
+                  "presas": ["A", "B", "C"],
+                  "quepared": 15,
+                  "isbloque": "bloque"
+                },
+                "Mensaje": "itinerario creado con éxito"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/editar/:id": {
+      "put": {
+        "summary": "Ejemplo de solicitud PUT con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "El id del itinerario a modificar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783. En el body van los elements a modificar unicamente, aunque en el ejemplo estén todos.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "autor": {
+                  "type": "string"
+                },
+                "dificultad": {
+                  "type": "integer"
+                },
+                "comentario": {
+                  "type": "string"
+                },
+                "presas": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "quepared": {
+                  "type": "integer",
+                  "enum": [15, 25]
+                },
+                "isbloque": {
+                  "type": "string",
+                  "enum": ["bloque", "travesia"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "itinerario": {
+                  "name": "Mi via",
+                  "autor": "Juanito",
+                  "dificultad": 7,
+                  "comentario": "Una via guapisima",
+                  "presas": ["A", "B", "C"],
+                  "quepared": 15,
+                  "isbloque": "bloque"
+                },
+                "Mensaje": "itinerario modificado con éxito"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/borrar/:id": {
+      "delete": {
+        "summary": "Ejemplo de solicitud DELETE para eliminar un articulo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "description": "El id del itinerario a eliminar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "itinerario": {
+                  "name": "Mi via",
+                  "autor": "Juanito",
+                  "dificultad": 7,
+                  "comentario": "Una via guapisima",
+                  "presas": ["A", "B", "C"],
+                  "quepared": 15,
+                  "isbloque": "bloque"
+                },
+                "Mensaje": "itinerario eliminado con éxito"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buscar": {
+      "get": {
+        "summary": "Ejemplo de solicitud GET para hacer una búsqueda",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parámetros de body para aplicar filtros a la búsqueda, se buscarán coincidencias dentro de los parámetros name y autor.También hay que indicar sobre que pared se va a realizar la busqueda",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "buscar": {
+                  "type": "string"
+                },
+                "quepared": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "itinerario": {
+                  "name": "Mi via",
+                  "autor": "Juanito",
+                  "dificultad": 7,
+                  "comentario": "Una via guapisima",
+                  "presas": ["A", "B", "C"],
+                  "quepared": 15,
+                  "isbloque": "bloque"
+                },
+                "Mensaje": "itinerario eliminado con éxito"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Via": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "autor": {
+          "type": "string"
+        },
+        "dificultad": {
+          "type": "integer"
+        },
+        "comentario": {
+          "type": "string"
+        },
+        "presas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quepared": {
+          "type": "integer",
+          "enum": [15, 25]
+        },
+        "isbloque": {
+          "type": "string",
+          "enum": ["bloque", "travesia"]
+        }
+      },
+      "required": [
+        "name",
+        "autor",
+        "dificultad",
+        "presas",
+        "quepared",
+        "isbloque"
+      ]
+    },
+
+    "Listado itinerarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "autor",
+          "dificultad",
+          "comentario",
+          "presas",
+          "quepared",
+          "isbloque"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "autor": {
+            "type": "string"
+          },
+          "dificultad": {
+            "type": "integer"
+          },
+          "comentario": {
+            "type": "string"
+          },
+          "presas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "quepared": {
+            "type": "integer",
+            "enum": [15, 25]
+          },
+          "isbloque": {
+            "type": "string",
+            "enum": ["bloque", "travesia"]
+          }
+        }
+      }
+    }
+  }
+}

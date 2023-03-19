@@ -9,12 +9,12 @@ const borrar = async (req, res) => {
     if (error || !articuloBorrado) {
       return res.status(400).json({
         status: "error",
-        mensaje: "N se ha enkontrado el itinerario",
+        mensaje: "No se ha enkontrado el itinerario",
       });
     }
 
     return res.status(200).json({
-      status: "succees",
+      Mensaje: "itinerario eliminado con éxito",
       articuloBorrado,
     });
   });

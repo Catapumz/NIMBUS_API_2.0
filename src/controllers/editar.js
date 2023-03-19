@@ -11,8 +11,8 @@ const editar = (req, res) => {
     { new: true },
     (error, articuloActualizado) => {
       return res.status(200).json({
-        status: "success",
         itinerario: articuloActualizado,
+        mensaje: "Itinerario actualizado con exito",
       });
     }
   );

@@ -1,5 +1,7 @@
 const express = require("express"); //asignamos a express las funciones de la libreria express
 const cors = require("cors"); // lo mismo que arriba pero conn cors
+const swaggerUi = require("swagger-ui-express"),
+  swaggerDocument = require("../swagger.json");
 
 const routes_listar = require("./routes/listar");
 const routes_guardar = require("./routes/guardar");
@@ -17,12 +19,14 @@ app.use(cors()); //middleware (?)
 app.use(express.json()); //recibir datos con content-type app/json
 app.use(express.urlencoded({ extended: true })); //recibir datos form-urlencoded
 
-//Crear rutas
-
+//rutas relacionadas con las vias
 app.use("/", routes_listar);
 app.use("/", routes_guardar);
 app.use("/", routes_borrar);
 app.use("/", routes_editar);
 app.use("/", routes_buscar);
+
+//rutas documentacion
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 module.exports = { app };
