@@ -1,8 +1,8 @@
 const Bloques_vias = require("../models/Bloques_vias");
 
 const consulta = async (req, res) => {
-  let { buscar } = req.body;
-  let { quepared } = req.body;
+  let { buscar } = req.query;
+  let { quepared } = req.query;
 
   //{ "buscar": "aqui la busqueda"} asi es como se pasa
   let consulta = await Bloques_vias.find({

@@ -27,13 +27,8 @@ describe("Buscar", () => {
   });
 
   it("Retrieves", async () => {
-    const busqueda = {
-      buscar: "hec",
-      quepared: 15,
-    };
     const result1 = await request(app)
-      .get("/buscar")
-      .send(busqueda)
+      .get("/buscar?buscar=hec&quepared=15")
       .expect(200);
     expect(result1.body.vias.length).toEqual(1);
   });

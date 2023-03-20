@@ -14,8 +14,8 @@
 
 const ndificultad = {
   negro: 4278190080,
-  morado: 4288423856,
-  naranja: 4294940672,
+  morado: [4288423856, 4294918273],
+  naranja: [4294940672, 4294945600],
   amarillo: 4294961979,
   verde: 4278190080,
 };

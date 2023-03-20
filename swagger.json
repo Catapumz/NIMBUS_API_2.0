@@ -21,32 +21,11 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/listar": {
+    "/listar?quepared=25&dificultad=verde&isbloque=Travesía": {
       "get": {
         "summary": "Ejemplo de solicitud GET con parámetros en el cuerpo",
         "consumes": ["multipart/form-data"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Parámetros de body para aplicar filtroa a la búsqueda, se pueden ignorar uno, dos o los tres.",
-            "required": false,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "quepared": {
-                  "type": "number"
-                },
-                "isbloque": {
-                  "type": "string"
-                },
-                "dificultad": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        ],
+
         "responses": {
           "200": {
             "description": "Success",
@@ -143,7 +122,7 @@
         }
       }
     },
-    "/editar/:id": {
+    "/editar/id": {
       "put": {
         "summary": "Ejemplo de solicitud PUT con parámetros en el cuerpo",
         "consumes": ["multipart/form-data"],
@@ -213,7 +192,7 @@
         }
       }
     },
-    "/borrar/:id": {
+    "/borrar/id": {
       "delete": {
         "summary": "Ejemplo de solicitud DELETE para eliminar un articulo",
         "consumes": ["multipart/form-data"],
@@ -249,41 +228,22 @@
         }
       }
     },
-    "/buscar": {
+    "/buscar?buscar=aquitextoabuscar&quepared=25": {
       "get": {
         "summary": "Ejemplo de solicitud GET para hacer una búsqueda",
         "consumes": ["multipart/form-data"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Parámetros de body para aplicar filtros a la búsqueda, se buscarán coincidencias dentro de los parámetros name y autor.También hay que indicar sobre que pared se va a realizar la busqueda",
-            "required": false,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "buscar": {
-                  "type": "string"
-                },
-                "quepared": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object",
+              "type": "array",
               "items": {
-                "$ref": "#/definitions/Via"
+                "$ref": "#/definitions/Listado itinerarios"
               }
             },
             "examples": {
-              "application/json": {
-                "itinerario": {
+              "application/json": [
+                {
                   "name": "Mi via",
                   "autor": "Juanito",
                   "dificultad": 7,
@@ -291,9 +251,8 @@
                   "presas": ["A", "B", "C"],
                   "quepared": 15,
                   "isbloque": "bloque"
-                },
-                "Mensaje": "itinerario eliminado con éxito"
-              }
+                }
+              ]
             }
           }
         }
