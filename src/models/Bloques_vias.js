@@ -31,6 +31,10 @@ const Via15Schema = Schema({
     type: String,
     required: true,
   },
+  dateCreation: {
+    type: Date,
+    required: true,
+  },
 });
 
 module.exports = model("Bloques_Vias", Via15Schema, "Bloques_Vias");

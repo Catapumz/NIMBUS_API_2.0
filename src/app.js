@@ -9,6 +9,8 @@ const routes_borrar = require("./routes/borrar");
 const routes_editar = require("./routes/editar");
 const routes_buscar = require("./routes/buscar");
 
+const routes_endpoint = require("./routes/endpoint");
+
 //Crear servidor Node
 const app = express();
 
@@ -25,6 +27,7 @@ app.use("/", routes_guardar);
 app.use("/", routes_borrar);
 app.use("/", routes_editar);
 app.use("/", routes_buscar);
+app.use("/", routes_endpoint);
 
 //rutas documentacion
 app.use("/documentacion", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
