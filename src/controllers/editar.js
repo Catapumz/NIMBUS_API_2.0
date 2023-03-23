@@ -5,8 +5,8 @@ const editar = (req, res) => {
 
   let parametros = req.body;
 
-  Bloques_Vias.findOneAndUpdate(
-    { id: articuloId },
+  Bloques_Vias.findByIdAndUpdate(
+    articuloId,
     parametros,
     { new: true },
     (error, articuloActualizado) => {
