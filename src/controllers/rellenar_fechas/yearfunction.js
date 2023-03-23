@@ -10,7 +10,7 @@ function ala(hastaqui) {
         break;
       }
       const fechaa = (mes, anio) => {
-        return "2023-" + mes + "-" + anio;
+        return "2022-" + mes + "-" + anio;
       };
 
       if (i < 10) {
@@ -27,13 +27,9 @@ function ala(hastaqui) {
 
       array[x] = fechaa(i1, j1);
       x++;
-      //return fechaa(i1, j1);
-      //console.log(fechaa(i1, j1));
     }
   }
   return array;
 }
-//ala(200);
-//console.log(ala(300).length);
 
 module.exports = { ala };
