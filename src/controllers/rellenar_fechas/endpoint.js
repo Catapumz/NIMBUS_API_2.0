@@ -5,15 +5,20 @@
 //  const fecha = "2023-" + i1 + "-" + j1;
 
 const Bloques_vias = require("../../models/Bloques_vias");
+const { ala } = require("./yearfunction");
 
 const endpoint = async (req, res) => {
-  await Bloques_vias.find({}).exec((error, bloques) => {
-    // ejecuto.find sobre una CLASE Bloques_vias, bloques es un array con objetos
+  const bloques = await Bloques_vias.find({});
+  fechas = ala(bloques.length);
 
-    return res.status(200).json({
-      status: "Éxito, aquí están los itinerarios de la pared de 15",
-      vias: bloques,
-    });
+  await Bloques_vias.updateMany(
+    {},
+    { $set: { dateCreation: ISODate(fechas) } }
+  );
+
+  const bloques1 = await Bloques_vias.find({});
+  return res.status(200).json({
+    bloques1,
   });
 };
 
