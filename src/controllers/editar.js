@@ -7,7 +7,7 @@ const editar = (req, res) => {
 
   Bloques_Vias.findOneAndUpdate(
     { id: articuloId },
-    parametros,
+    parametros,nananaaaaaaa
     { new: true },
     (error, articuloActualizado) => {
       return res.status(200).json({
