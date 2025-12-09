@@ -124,6 +124,10 @@ typings/
 # sftp configuration file
 sftp-config.json
 
+# uploads
+fotos/
+apks/
+
 # Package control specific files
 Package Control.last-run
 Package Control.ca-list

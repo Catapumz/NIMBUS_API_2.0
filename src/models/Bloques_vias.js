@@ -24,7 +24,7 @@ const Via15Schema = Schema({
     //required: true,
   },
   quepared: {
-    type: Number,
+    type: String,
     required: true,
   },
   isbloque: {
@@ -33,7 +33,7 @@ const Via15Schema = Schema({
   },
   dateCreation: {
     type: Date,
-    required: true,
+    //  required: true,
   },
 });
 

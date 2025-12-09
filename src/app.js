@@ -8,6 +8,17 @@ const routes_guardar = require("./routes/guardar");
 const routes_borrar = require("./routes/borrar");
 const routes_editar = require("./routes/editar");
 const routes_buscar = require("./routes/buscar");
+const routes_descargar = require("./routes/descargar_apk");
+const routes_subir_foto = require("./routes/subir_foto");
+const routes_descargar_foto = require("./routes/descargar_foto");
+const routes_listar_fotos = require("./routes/listar_fotos");
+const routes_eliminar_foto = require("./routes/eliminar_foto");
+const routes_nuevo_layout = require("./routes/nuevo_layout");
+const routes_listar_layouts = require("./routes/listar_layouts");
+const routes_editar_layout = require("./routes/editar_layout");
+const routes_eliminar_layout = require("./routes/eliminar_layout");
+
+const routes_subir_apk = require("./routes/subir_apk");
 
 const routes_endpoint = require("./routes/endpoint");
 
@@ -28,6 +39,16 @@ app.use("/", routes_borrar);
 app.use("/", routes_editar);
 app.use("/", routes_buscar);
 app.use("/", routes_endpoint);
+app.use("/", routes_descargar);
+app.use("/", routes_subir_apk);
+app.use("/", routes_subir_foto);
+app.use("/", routes_descargar_foto);
+app.use("/", routes_listar_fotos);
+app.use("/", routes_eliminar_foto);
+app.use("/", routes_nuevo_layout);
+app.use("/", routes_listar_layouts);
+app.use("/", routes_editar_layout);
+app.use("/", routes_eliminar_layout);
 
 //rutas documentacion
 app.use("/documentacion", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

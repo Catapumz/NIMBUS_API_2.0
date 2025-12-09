@@ -21,6 +21,183 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
+    "/subir_foto": {
+      "post": {
+        "tags": ["Fotos"],
+        "summary": "Subir una imagen y guardarla en el servidor",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "quepared",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nombre_guardado",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "foto",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foto subida correctamente",
+            "schema": {
+              "$ref": "#/definitions/Foto"
+            }
+          }
+        }
+      }
+    },
+
+    "/listar_fotos/{quepared}": {
+      "get": {
+        "tags": ["Fotos"],
+        "summary": "Listar fotos por pared",
+        "parameters": [
+          {
+            "name": "quepared",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listado de fotos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Foto"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/eliminar_foto/{id}": {
+      "delete": {
+        "tags": ["Fotos"],
+        "summary": "Eliminar una foto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foto eliminada"
+          }
+        }
+      }
+    },
+
+    "/nuevo_layout": {
+      "post": {
+        "tags": ["Layouts"],
+        "summary": "Crear un nuevo layout",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Layout"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Layout creado"
+          }
+        }
+      }
+    },
+
+    "/listar_layouts/{quepared}": {
+      "get": {
+        "tags": ["Layouts"],
+        "summary": "Listar layouts por pared",
+        "parameters": [
+          {
+            "name": "quepared",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listado de layouts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Layout"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/editar_layout/{id}": {
+      "put": {
+        "tags": ["Layouts"],
+        "summary": "Editar un layout",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Layout"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Layout actualizado"
+          }
+        }
+      }
+    },
+
+    "/eliminar_layout/{id}": {
+      "delete": {
+        "tags": ["Layouts"],
+        "summary": "Eliminar un layout",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Layout eliminado"
+          }
+        }
+      }
+    },
+
     "/listar?quepared=25&dificultad=verde&isbloque=Travesía": {
       "get": {
         "summary": "Ejemplo de solicitud GET con parámetros en el cuerpo",
@@ -260,6 +437,44 @@
     }
   },
   "definitions": {
+    "Foto": {
+      "type": "object",
+      "properties": {
+        "_id": { "type": "string" },
+        "quepared": { "type": "string" },
+        "nombre_original": { "type": "string" },
+        "nombre_guardado": { "type": "string" },
+        "tamano_bytes": { "type": "integer" },
+        "url_publica": { "type": "string" }
+      }
+    },
+
+    "Layout": {
+      "type": "object",
+      "properties": {
+        "_id": { "type": "string" },
+        "quepared": { "type": "string" },
+        "name": { "type": "string" },
+        "ledCount": { "type": "integer" },
+        "baseWidth": { "type": "integer" },
+        "baseHeight": { "type": "integer" },
+        "defaultHoldSize": { "type": "integer" },
+        "holds": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "led": { "type": "integer" },
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "size": { "type": "integer" }
+            }
+          }
+        },
+        "foto_id": { "type": "string" },
+        "foto_url_publica": { "type": "string" }
+      }
+    },
     "Via": {
       "type": "object",
       "properties": {

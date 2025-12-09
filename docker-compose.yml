@@ -5,6 +5,8 @@ services:
       context: .
     volumes:
       - ./:/usr/app
+      - ./apks:/usr/app/apks
+      - ./fotos:/usr/app/fotos
     ports:
       - "3000:3000"
     command: npm run start
