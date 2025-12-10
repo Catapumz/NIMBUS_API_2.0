@@ -36,21 +36,43 @@ const consulta = async (req, res) => {
       });
     }
 
-    return res.download(filePath, file, (err) => {
+    // 👇 AQUÍ VIENE EL CAMBIO IMPORTANTE
+    res.download(filePath, file, (err) => {
       if (err) {
+        // El cliente ha abortado la conexión (cerró pestaña, canceló descarga, etc.)
+        if (err.code === "ECONNABORTED" || err.code === "ECONNRESET") {
+          console.warn("El cliente canceló la descarga:", err.message);
+          return; // No intentamos responder nada, ya no tiene sentido
+        }
+
+        // Si ya se han enviado las cabeceras, NO se puede mandar JSON
+        if (res.headersSent) {
+          console.error(
+            "Error al descargar el archivo después de enviar las cabeceras:",
+            err
+          );
+          return;
+        }
+
         console.error("Error al descargar el archivo:", err);
         return res.status(500).json({
           status: "error",
           mensaje: "Error al descargar el archivo",
         });
+      } else {
+        console.log(`Descarga de ${file} completada correctamente.`);
       }
     });
   } catch (error) {
     console.error("Error en la descarga:", error);
-    return res.status(500).json({
-      status: "error",
-      mensaje: "Error interno del servidor",
-    });
+
+    // Por si acaso, solo respondemos si no se ha enviado nada aún
+    if (!res.headersSent) {
+      return res.status(500).json({
+        status: "error",
+        mensaje: "Error interno del servidor",
+      });
+    }
   }
 };
 
