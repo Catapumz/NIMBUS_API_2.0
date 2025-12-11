@@ -1,21 +1,20 @@
 const Bloques_Vias = require("../models/Bloques_vias");
 
-const editar = (req, res) => {
+const editar = async (req, res) => {
   let articuloId = req.params.id;
 
   let parametros = req.body;
 
-  Bloques_Vias.findOneAndUpdate(
-    { id: articuloId },
+  const viaActualizada = await Bloques_Vias.findByIdAndUpdate(
+    articuloId,
     parametros,
-    { new: true },
-    (error, articuloActualizado) => {
-      return res.status(200).json({
-        itinerario: articuloActualizado,
-        mensaje: "Itinerario actualizado con exito",
-      });
-    }
+    { new: true }
   );
+
+  return res.status(200).json({
+    itinerario: viaActualizada,
+    mensaje: "Itinerario actualizado con exito",
+  });
 };
 
 module.exports = { editar };
