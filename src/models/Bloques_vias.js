@@ -35,6 +35,10 @@ const Via15Schema = Schema({
     type: Date,
     //  required: true,
   },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = model("Bloques_Vias", Via15Schema, "Bloques_Vias");

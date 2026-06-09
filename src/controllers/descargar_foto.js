@@ -24,8 +24,16 @@ const descargarFoto = async (req, res) => {
       });
     }
     //whhOeekklkllljdkdddklddswjhdkjssklklsddjfdsdhslñds-    // Descargar
-    return res.download(filePath, file, (err) => {
+    res.download(filePath, file, (err) => {
       if (err) {
+        if (err.code === "ECONNABORTED" || err.code === "ECONNRESET") {
+          console.warn("El cliente canceló la descarga de la foto:", err.message);
+          return;
+        }
+        if (res.headersSent) {
+          console.error("Error al descargar la foto después de enviar cabeceras:", err);
+          return;
+        }
         console.error("Error al descargar la imagen:", err);
         return res.status(500).json({
           status: "error",

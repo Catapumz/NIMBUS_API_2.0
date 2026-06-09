@@ -2,6 +2,7 @@ const express = require("express"); //asignamos a express las funciones de la li
 const cors = require("cors"); // lo mismo que arriba pero conn cors
 const swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("../swagger.json");
+const swaggerUiAssetPath = require("swagger-ui-dist").getAbsoluteFSPath();
 
 const routes_listar = require("./routes/listar");
 const routes_guardar = require("./routes/guardar");
@@ -51,6 +52,7 @@ app.use("/", routes_editar_layout);
 app.use("/", routes_eliminar_layout);
 
 //rutas documentacion
+app.use("/assets", express.static(swaggerUiAssetPath));
 app.use("/documentacion", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 module.exports = { app };

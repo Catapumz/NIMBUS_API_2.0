@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "35.180.113.93:3000",
+  "host": "api-main.nimbuswalls.com",
   "basePath": "/",
   "tags": [
     {

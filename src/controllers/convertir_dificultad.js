@@ -1,3 +1,4 @@
+// @deprecated - el frontend envía el número ARGB directamente, ya no se necesita conversión
 /*function ndificultad(dificultad) {
   if (dificultad == "negro") {
     return 4278190080;
@@ -17,7 +18,7 @@ const ndificultad = {
   morado: [4293467747, 4294918273],
   naranja: [4294940672, 4294945600],
   amarillo: 4294961979,
-  verde: 4278190080,
+  verde: 4283215696,
 };
 
 module.exports = ndificultad;
