@@ -39,6 +39,12 @@ const Via15Schema = Schema({
     type: Boolean,
     default: false,
   },
+  // userId de NimbusComp que creó la vía. OPCIONAL: las vías antiguas y las que
+  // crea la app Flutter no lo llevan. NimbusComp lo usa para permitir editar/
+  // borrar solo a su creador. No se toca `autor` (la Flutter apunta a él).
+  creador: {
+    type: String,
+  },
 });
 
 module.exports = model("Bloques_Vias", Via15Schema, "Bloques_Vias");
