@@ -21,8 +21,6 @@ const routes_eliminar_layout = require("./routes/eliminar_layout");
 
 const routes_subir_apk = require("./routes/subir_apk");
 
-const routes_endpoint = require("./routes/endpoint");
-
 //Crear servidor Node
 const app = express();
 
@@ -39,7 +37,6 @@ app.use("/", routes_guardar);
 app.use("/", routes_borrar);
 app.use("/", routes_editar);
 app.use("/", routes_buscar);
-app.use("/", routes_endpoint);
 app.use("/", routes_descargar);
 app.use("/", routes_subir_apk);
 app.use("/", routes_subir_foto);
